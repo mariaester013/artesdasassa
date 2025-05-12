@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Peças | Artes da Sassa</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background-color: #fadcd9;
+      color: #333;
+    }
+
+    .navbar {
+      background-color: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 20px;
+      border-bottom: 2px solid #f4a8a8;
+    }
+
+    .navbar ul {
+      list-style: none;
+      display: flex;
+      margin: 0;
+      padding: 0;
+    }
+
+    .navbar li {
+      margin-left: 20px;
+    }
+
+    .navbar a {
+      text-decoration: none;
+      color: #f4a8a8;
+      font-weight: bold;
+    }
+
+    .carrinho-btn {
+      position: relative;
+      cursor: pointer;
+    }
+
+    #contador-carrinho {
+      position: absolute;
+      top: -10px;
+      right: -10px;
+      background: red;
+      color: white;
+      border-radius: 50%;
+      padding: 2px 6px;
+      font-size: 12px;
+    }
+
+    .categoria {
+      padding: 40px 20px;
+    }
+
+    .categoria h2 {
+      color: #f09090;
+      font-size: 28px;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .galeria {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+    }
+
+    .galeria-item {
+      background: white;
+      padding: 15px;
+      border-radius: 10px;
+      text-align: center;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .galeria-item img {
+      width: 100%;
+      max-height: 200px;
+      object-fit: contain;
+      border-radius: 8px;
+      background-color: #fff;
+    }
+
+    .galeria-item p {
+      margin: 10px 0 5px;
+    }
+
+    .galeria-item button {
+      margin-top: 5px;
+      padding: 8px 16px;
+      border: none;
+      background-color: #f4a8a8;
+      color: white;
+      border-radius: 20px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background-color 0.3s ease;
+    }
+
+    .galeria-item button:hover {
+      background-color: #e28888;
+    }
+
+    #carrinho-modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+
+    #carrinho {
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      max-width: 500px;
+      width: 90%;
+      max-height: 80vh;
+      overflow-y: auto;
+      color: #f09090;
+    }
+
+    .item-carrinho {
+      display: flex;
+      align-items: center;
+      margin-bottom: 15px;
+      border-bottom: 1px solid #f4a8a8;
+      padding-bottom: 10px;
+      margin-bottom: 15px;
+    }
+
+    .item-carrinho img {
+      width: 60px;
+      height: 60px;
+      object-fit: cover;
+      border-radius: 8px;
+      margin-right: 15px;
+    }
+
+    .item-carrinho div {
+      flex-grow: 1;
+    }
+
+    .item-carrinho p {
+      margin: 0;
+      color: #f09090;
+    }
+
+    .controle-quantidade {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .controle-quantidade button {
+      background: #f4a8a8;
+      color: white;
+      padding: 5px 10px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .controle-quantidade button:hover {
+      background: #e28888;
+    }
+
+    .carrinho-fechado {
+      text-align: center;
+    }
+
+    h2, p {
+      color: #f09090;
+    }
+
+    #enviar-pedido {
+      margin-top: 20px;
+      padding: 10px 20px;
+      background-color: #f4a8a8;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+      width: 100%;
+      text-align: center;
+    }
+
+    #enviar-pedido:hover {
+      background-color: #e28888;
+    }
+
+    #mensagem-carrinho {
+      background-color: #fff3cd;
+      padding: 15px;
+      margin-bottom: 20px;
+      border: 1px solid #ffeeba;
+      border-radius: 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: #856404;
+    }
+
+    #mensagem-carrinho p {
+      margin: 0;
+      font-size: 16px;
+    }
+
+    #mensagem-carrinho button {
+      background-color: transparent;
+      border: none;
+      font-size: 20px;
+      cursor: pointer;
+      color: #856404;
+    }
+
+    .brilhinho {
+  position: absolute;
+  font-size: 18px;
+  animation: brilhoAnimacao 0.8s ease-out forwards;
+  pointer-events: none;
+  color: #ff8ad1; /* Combina com seu tema rosa pastel */
+  z-index: 9999;
+}
+
+@keyframes brilhoAnimacao {
+  0% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-20px) scale(1.5);
+  }
+}
+
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <ul>
+      <li><a href= "inicio.html">Página Inicial</a></li>
+      <li><a href="sobre.html">Sobre Mim</a></li>
+      <li><a href="peca.html" class="active">Peças</a></li>
+      <li><a href="contato.html">Contato</a></li>
+      <!-- Carrinho -->
+      <li class="carrinho-btn" onclick="abrirCarrinho()">
+        🛒 <span id="contador-carrinho">0</span>
+      </li>
+    </ul>
+  </nav>
+
+  <section class="categoria">
+    <h2>Bonecas de Pano</h2>
+    <div class="galeria">
+
+      <div class="galeria-item">
+        <img src="peça_1.jpg" alt="Margarida" />
+        <p><strong>Margarida</strong></p>
+        <p>R$ 55,00</p>
+        <button onclick="adicionarAoCarrinho('Margarida', 55.00, 'peça_1.jpg')">Comprar</button>
+      </div>
+
+      <div class="galeria-item">
+        <img src="peça_3.jpg" alt="Boneca Vanessa" />
+        <p><strong>Boneca Vanessa</strong></p>
+        <p>R$ 260,00</p>
+        <button onclick="adicionarAoCarrinho('Boneca Vanessa', 260.00, 'peça_3.jpg')">Comprar</button>
+      </div>
+
+      <div class="galeria-item">
+        <img src="menina de pano.jpg" alt="Menina de Pano" />
+        <p><strong>Menina de Pano</strong></p>
+        <p>R$ 150,00</p>
+        <button onclick="adicionarAoCarrinho('Menina de Pano', 150.00, 'menina de pano.jpg')">Comprar</button>
+      </div>
+
+      <div class="galeria-item">
+        <img src="Boneca_Lana.jpg" alt="Boneca Lana" />
+        <p><strong>Boneca Lana</strong></p>
+        <p>R$ 80,00</p>
+        <button onclick="adicionarAoCarrinho('Boneca Lana', 80.00, 'Boneca_Lana.jpg')">Comprar</button>
+      </div>
+
+      <div class="galeria-item">
+        <img src="boneco_para_brincar.jpg" alt="Boneco para Brincar" />
+        <p><strong>Boneco para Brincar</strong></p>
+        <p>R$ 95,00</p>
+        <button onclick="adicionarAoCarrinho('Boneco para Brincar', 95.00, 'boneco_para_brincar.jpg')">Comprar</button>
+      </div>
+
+      <div class="galeria-item">
+        <img src="Boneca_Clara.jpg" alt="Boneca Clara" />
+        <p><strong>Boneca Clara</strong></p>
+        <p>R$ 45,00</p>
+        <button onclick="adicionarAoCarrinho('Boneca Clara', 45.00, 'Boneca_Clara.jpg')">Comprar</button>
+      </div>
+
+      <div class="galeria-item">
+        <img src="Boneca_de_Pano.jpg" alt="Boneca de Pano" />
+        <p><strong>Boneca de Pano</strong></p>
+        <p>R$ 80,00</p>
+        <button onclick="adicionarAoCarrinho('Boneca de Pano', 80.00, 'Boneca_de_Pano.jpg')">Comprar</button>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Guirlandas -->
+  <section class="categoria">
+    <h2>Guirlandas</h2>
+    <div class="galeria">
+
+      <div class="galeria-item">
+        <img src="guirlanda_maternidade.jpg" alt="Guirlanda de Maternidade" />
+        <p><strong>Guirlanda de Maternidade</strong></p>
+        <p>R$ 230,00</p>
+        <button onclick="adicionarAoCarrinho('Guirlanda de Maternidade', 230.00, 'guirlanda_maternidade.jpg')">Comprar</button>
+      </div>
+
+      <div class="galeria-item">
+        <img src="guirlanda_coração.jpg" alt="Guirlanda Coração" />
+        <p><strong>Guirlanda Coração</strong></p>
+        <p>R$ 21,00</p>
+        <button onclick="adicionarAoCarrinho('Guirlanda Coração', 21.00, 'guirlanda_coração.jpg')">Comprar</button>
+      </div>
+
+      <div class="galeria-item">
+        <img src="páscoa.jpg" alt="Guirlanda de Páscoa" />
+        <p><strong>Guirlanda de Páscoa</strong></p>
+        <p>R$ 180,00</p>
+        <button onclick="adicionarAoCarrinho('Guirlanda de Páscoa', 180.00, 'páscoa.jpg')">Comprar</button>
+      </div>
+
+      <div class="galeria-item">
+        <img src="guirlanda_dinossauro.jpg" alt="Guirlanda de Dinossauro" />
+        <p><strong>Guirlanda de Dinossauro</strong></p>
+        <p>R$ 280,00</p>
+        <button onclick="adicionarAoCarrinho('Guirlanda de Dinossauro', 280.00, 'guirlanda_dinossauro.jpg')">Comprar</button>
+      </div>
+
+<!-- CATEGORIA: Decorativos -->
+<section class="categoria">
+  <h2>Decorativos</h2>
+  <div class="galeria">
+
+    <div class="galeria-item">
+      <img src="marca_pagina_gatinho.jpg" alt="Marcador de Livros" />
+      <p><strong>Marcador de Livros</strong></p>
+      <p>R$ 20,00</p>
+      <button onclick="adicionarAoCarrinho('Marcador de Livros', 20.00, 'marca_pagina_gatinho.jpg')">Comprar</button>
+    </div>
+
+    <div class="galeria-item">
+      <img src="fazenda_animais.jpg" alt="Bichinhos da Fazenda" />
+      <p><strong>Bichinhos da Fazenda</strong></p>
+      <p>R$ 5,00</p>
+      <button onclick="adicionarAoCarrinho('Bichinhos da Fazenda', 5.00, 'fazenda_animais.jpg')">Comprar</button>
+    </div>
+
+    <div class="galeria-item">
+      <img src="frutinhas.jpg" alt="Coleção Frutinhas" />
+      <p><strong>Coleção Frutinhas</strong></p>
+      <p>R$ 50,00</p>
+      <div style="margin-bottom: 10px;">
+        <p style="margin: 5px 0;">Escolha sua frutinha:</p>
+        <div id="opcoes-frutinhas" style="display: flex; flex-wrap: wrap; gap: 5px; justify-content: center;">
+          <button onclick="adicionarFrutinhaCarrinho('Abacaxizinho', event)">Abacaxizinho</button>
+          <button onclick="adicionarFrutinhaCarrinho('Melancia', event)">Melancia</button>
+          <button onclick="adicionarFrutinhaCarrinho('Laranjinha', event)">Laranjinha</button>
+          <button onclick="adicionarFrutinhaCarrinho('Pêra', event)">Pêra</button>
+          <button onclick="adicionarFrutinhaCarrinho('Moranguinho', event)">Moranguinho</button>
+          
+          
+        </div>
+      </div>
+    </div>
+    
+  <div id="carrinho-modal" style="display: none;">
+    <div id="carrinho">
+      <div id="mensagem-carrinho">
+        <p>Clique em 'Enviar pedido' para ser direcionado ao WhatsApp da nossa loja. Lá, calcularemos o valor do frete, você nos enviará seu endereço e, após o pagamento via Pix, nos mande o comprovante pelo mesmo chat.</p>
+        <button onclick="fecharMensagem()">×</button>
+      </div>
+      <h2 id="carrinho-status">Seu carrinho está vazio! Adicione itens!</h2>
+      <div id="itens-carrinho"></div>
+      <p><strong>Total:</strong> R$ <span id="total-carrinho">0,00</span></p>
+      <button onclick="fecharCarrinho()">Fechar</button>
+      <!-- Botão para enviar pedido via WhatsApp -->
+      <button id="enviar-pedido" onclick="enviarPedidoWhatsApp()">Enviar Pedido</button>
+    </div>
+  </div>
+
+  <script>
+    const carrinho = [];
+
+    function adicionarAoCarrinho(nome, preco, imagem) {
+      const itemExistente = carrinho.find(item => item.nome === nome);
+      if (itemExistente) {
+        itemExistente.quantidade++;
+      } else {
+        carrinho.push({ nome, preco, imagem, quantidade: 1 });
+      }
+      atualizarCarrinho();
+      abrirCarrinho();
+    }
+
+    function adicionarFrutinhaCarrinho(nomeFrutinha, event) {
+  const nome = `Coleção Frutinhas - ${nomeFrutinha}`;
+  const preco = 50.00;
+  const imagem = 'frutinhas.jpg';
+
+  adicionarAoCarrinho(nome, preco, imagem);
+
+  mostrarBrilhinho(event);
+}
+
+function mostrarBrilhinho(event) {
+  const brilho = document.createElement("div");
+  brilho.classList.add("brilhinho");
+  brilho.textContent = "✨";
+
+  document.body.appendChild(brilho);
+
+  const x = event.clientX;
+  const y = event.clientY;
+  brilho.style.left = `${x}px`;
+  brilho.style.top = `${y}px`;
+
+  setTimeout(() => {
+    brilho.remove();
+  }, 800);
+}
+
+
+
+    function atualizarCarrinho() {
+      const container = document.getElementById('itens-carrinho');
+      const totalSpan = document.getElementById('total-carrinho');
+      container.innerHTML = '';
+
+      let total = 0;
+      carrinho.forEach(item => {
+        const subtotal = item.preco * item.quantidade;
+        total += subtotal;
+
+        const div = document.createElement('div');
+        div.classList.add('item-carrinho');
+        div.innerHTML = `
+          <img src="${item.imagem}" alt="${item.nome}">
+          <div>
+            <p><strong>${item.nome}</strong></p>
+            <p>Preço unitário: R$ ${item.preco.toFixed(2)}</p>
+            <div class="controle-quantidade">
+              <button onclick="alterarQuantidade('${item.nome}', -1)">-</button>
+              <p><strong>${item.quantidade}</strong></p>
+              <button onclick="alterarQuantidade('${item.nome}', 1)">+</button>
+            </div>
+            <p>Subtotal: R$ ${subtotal.toFixed(2)}</p>
+          </div>
+        `;
+        container.appendChild(div);
+      });
+
+      totalSpan.textContent = total.toFixed(2);
+
+      // Atualizar o status do carrinho
+      const carrinhoStatus = document.getElementById('carrinho-status');
+      if (carrinho.length === 0) {
+        carrinhoStatus.textContent = "Seu carrinho está vazio! Adicione itens!";
+      } else {
+        carrinhoStatus.textContent = "Confira seu carrinho!";
+      }
+
+      // Atualizar contador na navbar
+      document.getElementById('contador-carrinho').textContent = carrinho.length;
+    }
+
+    function alterarQuantidade(nome, incremento) {
+      const item = carrinho.find(item => item.nome === nome);
+      if (item) {
+        item.quantidade += incremento;
+        if (item.quantidade <= 0) {
+          carrinho.splice(carrinho.indexOf(item), 1); // Remove item se a quantidade for zero ou negativa
+        }
+      }
+      atualizarCarrinho();
+    }
+
+    function abrirCarrinho() {
+      document.getElementById('carrinho-modal').style.display = 'flex';
+    }
+
+    function fecharCarrinho() {
+      document.getElementById('carrinho-modal').style.display = 'none';
+    }
+
+    function fecharMensagem() {
+      document.getElementById('mensagem-carrinho').style.display = 'none';
+    }
+
+    function enviarPedidoWhatsApp() {
+      let mensagem = "Olá. Vim pelo seu site, gostaria de fazer o seguinte pedido:\n\n";
+      carrinho.forEach(item => {
+        mensagem += `${item.quantidade}x ${item.nome} - R$ ${(item.preco * item.quantidade).toFixed(2)}\n`;
+      });
+      mensagem += `\nTotal: R$ ${document.getElementById('total-carrinho').textContent}`;
+      
+      // Codificando a mensagem para ser passada no link
+      const mensagemCodificada = encodeURIComponent(mensagem);
+      const linkWhatsApp = `https://api.whatsapp.com/send?phone=5511971100643&text=${mensagemCodificada}`;
+      
+      // Abrir o WhatsApp
+      window.open(linkWhatsApp, "_blank");
+    }
+  </script>
+</body>
+</html>

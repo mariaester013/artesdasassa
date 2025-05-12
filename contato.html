@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Contato - Artes da Sassa</title>
+  <style>
+    :root {
+      --rosa-pastel: #fadcd9;
+      --rosa-pastel-escuro: #f4a8a8;
+      --branco: #fff;
+      --texto: #333;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      background-color: var(--rosa-pastel);
+      color: var(--texto);
+    }
+
+    a {
+      text-decoration: none;
+      color: var(--rosa-pastel-escuro);
+      font-weight: bold;
+    }
+
+    .navbar {
+      background-color: var(--branco);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 20px;
+      border-bottom: 2px solid var(--rosa-pastel-escuro);
+    }
+
+    .navbar .logo img {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      border: 2px solid var(--rosa-pastel-escuro);
+    }
+
+    .navbar ul {
+      list-style: none;
+      display: flex;
+    }
+
+    .navbar li {
+      margin-left: 20px;
+    }
+
+    .navbar ul li a.active {
+      color: var(--rosa-pastel-escuro);
+      border-bottom: 2px solid var(--rosa-pastel-escuro);
+    }
+
+    .contato {
+      padding: 40px 20px;
+      background-color: var(--rosa-pastel);
+    }
+
+    .contato h1 {
+      text-align: center;
+      font-size: 2rem;
+      margin-bottom: 20px;
+      color: var(--rosa-pastel-escuro);
+    }
+
+    .social-links {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .social-link {
+      display: flex;
+      align-items: center;
+      background-color: var(--branco);
+      border-radius: 10px;
+      padding: 15px 20px;
+      width: 100%;
+      max-width: 500px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease;
+    }
+
+    .social-link:hover {
+      transform: scale(1.05);
+    }
+
+    .social-link img {
+      width: 40px;
+      height: 40px;
+      margin-right: 15px;
+    }
+
+    .social-link p {
+      font-size: 1.2rem;
+      color: var(--rosa-pastel-escuro);
+    }
+
+    .btn-social {
+      margin-left: auto;
+      padding: 8px 16px;
+      background-color: var(--rosa-pastel-escuro);
+      color: #fff;
+      border-radius: 20px;
+      font-weight: bold;
+      transition: background-color 0.3s ease;
+    }
+
+    .btn-social:hover {
+      background-color: #e38b8b;
+    }
+
+    footer {
+      background-color: var(--branco);
+      padding: 20px;
+      border-top: 2px solid var(--rosa-pastel-escuro);
+      margin-top: 40px;
+    }
+
+    .footer-content {
+      max-width: 1000px;
+      margin: auto;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      align-items: center;
+      text-align: center;
+    }
+
+    .footer-content .logo img {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      border: 2px solid var(--rosa-pastel-escuro);
+    }
+
+    .footer-content ul {
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin: 10px 0;
+    }
+
+    .footer-content li {
+      margin: 0 10px;
+    }
+
+    @media(max-width: 768px) {
+      .navbar ul {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .navbar li {
+        margin: 5px 0;
+      }
+
+      .social-link {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .social-link img {
+        margin-bottom: 10px;
+      }
+
+      .social-link p {
+        text-align: center;
+      }
+
+      .btn-social {
+        margin-top: 10px;
+        margin-left: 0;
+        width: 100%;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="logo">
+      <img src="channels4_profile.jpg" alt="Logo - Artes da Sassa">
+    </div>
+    <ul>
+      <li><a href="inicio.html">Página Inicial</a></li>
+      <li><a href="sobre.html">Sobre Mim</a></li>
+      <li><a href="peça.html">Peças</a></li>
+      <li><a href="contato.html" class="active">Contato</a></li>
+    </ul>
+  </nav>
+
+  <!-- Contato -->
+  <section class="contato">
+    <h1>Entre em Contato</h1>
+    <div class="social-links">
+      <!-- Instagram -->
+      <div class="social-link">
+        <img src="Instagram_icon.png" alt="Instagram">
+        <p>@artes_da_sassa</p>
+        <a href="https://www.instagram.com/artes_da_sassa/" target="_blank" class="btn-social">Visite meu perfil</a>
+      </div>
+
+      <!-- YouTube -->
+      <div class="social-link">
+        <img src="3caa276c-33ec-4a69-a356-4903f4bf19fb.png" alt="YouTube">
+        <p>Canal Artes da Sassa</p>
+        <a href="https://www.youtube.com/c/ArtesdaSassa" target="_blank" class="btn-social">Acesse o canal</a>
+      </div>
+
+      <!-- WhatsApp -->
+      <div class="social-link">
+        <img src="c5261e14-a7f7-47ad-8b78-aa91ab19a5f5.png" alt="WhatsApp">
+        <p>+55 11 97110-0643</p>
+        <a href="https://wa.link/hs5iw3" target="_blank" class="btn-social">Fale comigo</a>
+      </div>
+
+    
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-content">
+      <div class="logo">
+        <img src="channels4_profile.jpg" alt="Logo - Artes da Sassa">
+      </div>
+      <ul>
+        <li><a href="index.html">Página Inicial</a></li>
+        <li><a href="sobre.html">Sobre Mim</a></li>
+        <li><a href="pecas.html">Peças</a></li>
+        <li><a href="contato.html">Contato</a></li>
+      </ul>
+      <a href="https://wa.link/hs5iw3" class="telefone-botao" target="_blank">Fale comigo no WhatsApp</a>
+    </div>
+  </footer>
+
+</body>
+</html>

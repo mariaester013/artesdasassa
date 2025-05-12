@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Artes da Sassa - Sobre Mim</title>
+  <style>
+    /* Cores e variáveis */
+    :root {
+      --rosa-pastel: #FADCD9;
+      --rosa-pastel-escuro: #F4A8A8;
+      --cor-texto: #333;
+      --branco: #fff;
+    }
+
+    /* Reset básico */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      background-color: var(--rosa-pastel);
+      color: var(--cor-texto);
+      line-height: 1.6;
+    }
+
+    a {
+      text-decoration: none;
+      color: var(--rosa-pastel-escuro);
+      font-weight: bold;
+    }
+
+    /* Top Bar */
+    .top-bar {
+      background-color: var(--branco);
+      padding: 10px 20px;
+      text-align: right;
+      font-size: 0.9em;
+    }
+    .top-bar span {
+      margin-left: 15px;
+    }
+
+    /* Navbar */
+    .navbar {
+      background-color: var(--branco);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 20px;
+      border-bottom: 2px solid var(--rosa-pastel-escuro);
+    }
+    .navbar .logo img {
+      width: 80px;
+      height: 80px;
+      border: 2px solid var(--rosa-pastel-escuro);
+      border-radius: 50%;
+    }
+    .navbar ul {
+      list-style: none;
+      display: flex;
+    }
+    .navbar li {
+      margin-left: 20px;
+    }
+    .navbar ul li a.active {
+      color: var(--rosa-pastel-escuro);
+      font-weight: bold;
+      border-bottom: 2px solid var(--rosa-pastel-escuro);
+    }
+    
+    /* Seção Sobre Mim */
+    .sobre {
+      max-width: 800px;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+    .sobre h1 {
+      text-align: center;
+      margin-bottom: 30px;
+      color: var(--rosa-pastel-escuro);
+    }
+    .sobre p {
+      margin-bottom: 20px;
+      font-size: 1.1em;
+      line-height: 1.5;
+      text-align: justify;
+    }
+    
+    /* Footer */
+    footer {
+      background-color: var(--branco);
+      padding: 20px;
+      border-top: 2px solid var(--rosa-pastel-escuro);
+      margin-top: 40px;
+    }
+    .footer-content {
+      max-width: 1000px;
+      margin: auto;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      align-items: center;
+      text-align: center;
+    }
+    .footer-content .logo img {
+      width: 60px;
+      height: 60px;
+      border: 2px solid var(--rosa-pastel-escuro);
+      border-radius: 50%;
+    }
+    .footer-content ul {
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin: 10px 0;
+    }
+    .footer-content li {
+      margin: 0 10px;
+    }
+    .footer-content .contato {
+      font-size: 1em;
+      color: var(--cor-texto);
+    }
+
+    /* Responsividade */
+    @media(max-width: 768px) {
+      .navbar ul, .footer-content ul {
+        flex-direction: column;
+      }
+      .navbar li, .footer-content li {
+        margin: 5px 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Top Bar -->
+  <div class="top-bar">
+    <span>Tel: (11) 1234-5678</span>
+    <span>Email: contato@artsdasassa.com</span>
+    <span><a href="https://www.youtube.com/c/ArtesdaSassa" target="_blank">YouTube</a></span>
+    <span><a href="https://www.instagram.com/artsdasassa" target="_blank">Instagram</a></span>
+  </div>
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="logo">
+      <img src="channels4_profile.jpg" alt="Logo - Artes da Sassa">
+    </div>
+    <ul>
+      <li><a href="inicio.html">Página Inicial</a></li>
+      <li><a href="sobre.html" class="active">Sobre Mim</a></li>
+      <li><a href="peça.html">Peças</a></li>
+      <li><a href="contato.html">Contato</a></li>
+    </ul>
+  </nav>
+
+  <!-- Conteúdo - Sobre Mim -->
+  <section class="sobre">
+    <h1>Sobre Mim</h1>
+    <p>
+      Olá, meu nome é Sabrina Bressane Cruz. Sou professora dedicada, com 46 anos de vida repleta de experiências e aprendizados, tanto na sala de aula quanto no mundo do artesanato. Minha paixão por ensinar e criar se manifesta de duas maneiras: dando aulas para meus alunos em uma escolinha, onde compartilho conhecimento e inspirações, e também através das minhas criações artesanais, que se tornaram minha segunda paixão.
+    </p>
+    <p>
+      Há 7 anos, mergulhei de cabeça no universo do artesanato, onde encontro a oportunidade de transformar materiais simples em peças únicas e cheias de significado. Trabalho com a confecção de bonecas de pano e guirlandas de maternidade, sempre cuidando de cada detalhe com muito carinho e dedicação. Para compartilhar esse conhecimento e inspirar outras pessoas, criei um canal no YouTube, onde ensino o passo a passo das minhas peças e disponibilizo os moldes para que todos possam reproduzir e se encantar com o processo criativo.
+    </p>
+    <p>
+      Sou casada com meu marido Paulo Felipe, com quem construo uma linda história de parceria e companheirismo. Juntos, somos pais de dois filhos maravilhosos: Ester, de 15 anos, e André, de 11 anos, que enchem minha vida de alegria e motivação diariamente.
+    </p>
+    <p>
+      Resido no interior de São Paulo, em um ambiente acolhedor que inspira minhas criações e valoriza a tradição do artesanato local. Convido você a conhecer ainda mais sobre mim e minhas peças, acompanhando minhas atividades e novidades nas redes sociais. Seja bem-vindo(a) ao meu universo, onde o ensino e a arte se unem para transformar e encantar.
+    </p>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-content">
+      <div class="logo">
+        <img src="channels4_profile.jpg" alt="Logo - Artes da Sassa">
+      </div>
+      <ul>
+        <li><a href="index.html">Página Inicial</a></li>
+        <li><a href="sobre.html" class="active">Sobre Mim</a></li>
+        <li><a href="pecas.html">Peças</a></li>
+        <li><a href="contato.html">Contato</a></li>
+      </ul>
+      <div class="contato">Tel: (11) 97110-0643</div>
+    </div>
+  </footer>
+</body>
+</html>

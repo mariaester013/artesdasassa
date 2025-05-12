@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Artes da Sassa</title>
+  <style>
+    #mensagem-boas-vindas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(250, 220, 217, 0.95); /* rosa pastel com transparência */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 1.5s ease;
+  text-align: center;
+}
+
+#mensagem-boas-vindas.mostrar {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+#mensagem-boas-vindas.esconder {
+  opacity: 0;
+  pointer-events: none;
+}
+
+#mensagem-boas-vindas p {
+  font-size: 2rem;
+  color: var(--rosa-pastel-escuro);
+  font-weight: bold;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 20px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+    :root {
+      --rosa-pastel: #fadcd9;
+      --rosa-pastel-escuro: #f4a8a8;
+      --branco: #fff;
+      --texto: #333;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      background-color: var(--rosa-pastel);
+      color: var(--texto);
+    }
+
+    a {
+      text-decoration: none;
+      color: var(--rosa-pastel-escuro);
+      font-weight: bold;
+    }
+
+    .telefone-botao {
+      background-color: var(--rosa-pastel-escuro);
+      color: white;
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-weight: bold;
+      margin-right: 15px;
+      transition: background-color 0.3s ease;
+      display: inline-block;
+    }
+
+    .telefone-botao:hover {
+      background-color: #e38b8b;
+    }
+
+    .top-bar {
+      background-color: var(--branco);
+      padding: 10px 20px;
+      text-align: right;
+      font-size: 0.9rem;
+    }
+
+    .top-bar span {
+      margin-left: 15px;
+    }
+
+    .navbar {
+      background-color: var(--branco);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 20px;
+      border-bottom: 2px solid var(--rosa-pastel-escuro);
+    }
+
+    .navbar .logo img {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      border: 2px solid var(--rosa-pastel-escuro);
+    }
+
+    .navbar ul {
+      list-style: none;
+      display: flex;
+    }
+
+    .navbar li {
+      margin-left: 20px;
+    }
+
+    .navbar ul li a.active {
+      color: var(--rosa-pastel-escuro);
+      border-bottom: 2px solid var(--rosa-pastel-escuro);
+    }
+
+    .hero {
+      background-color: var(--rosa-pastel);
+      padding: 40px 0;
+      display: flex;
+      justify-content: center;
+    }
+
+    .hero-container {
+      position: relative;
+      max-width: 1890px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    .hero-img {
+      width: 100%;
+      max-height: 500px;
+      object-fit: cover;
+      border-radius: 20px;
+      display: block;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .cta-button {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: var(--rosa-pastel-escuro);
+      color: #fff;
+      padding: 16px 32px;
+      border: none;
+      border-radius: 30px;
+      font-size: 1.2rem;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.3s ease;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    .cta-button:hover {
+      background-color: #e38b8b;
+      transform: translate(-50%, -50%) scale(1.05);
+    }
+
+    .biografia {
+      background-color: var(--rosa-pastel);
+      padding: 60px 20px;
+    }
+
+    .bio-container {
+      max-width: 1200px;
+      margin: auto;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 40px;
+    }
+
+    .bio-img img {
+      width: 300px;
+      border-radius: 20px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .bio-texto {
+      flex: 1;
+    }
+
+    .bio-texto h2 {
+      font-size: 1.8rem;
+      color: var(--rosa-pastel-escuro);
+      margin-bottom: 20px;
+    }
+
+    .bio-texto p {
+      font-size: 1.1rem;
+      line-height: 1.6;
+      margin-bottom: 15px;
+      text-align: justify;
+    }.galeria {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 30px;
+  padding: 40px 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.galeria-item {
+  text-align: center;
+}
+
+.galeria-item img {
+  width: 100%;
+  height: 200px;
+  object-fit: contain;
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease;
+  padding: 10px;
+}
+
+.galeria-item img:hover {
+  transform: scale(1.03);
+}
+
+.galeria-item p {
+  margin-top: 10px;
+  font-weight: bold;
+  font-size: 1rem;
+  color: var(--rosa-pastel-escuro);
+}
+
+
+
+    footer {
+      background-color: var(--branco);
+      padding: 20px;
+      border-top: 2px solid var(--rosa-pastel-escuro);
+      margin-top: 40px;
+    }
+
+    .footer-content {
+      max-width: 1000px;
+      margin: auto;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      align-items: center;
+      text-align: center;
+    }
+
+    .footer-content .logo img {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      border: 2px solid var(--rosa-pastel-escuro);
+    }
+
+    .footer-content ul {
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin: 10px 0;
+    }
+
+    .footer-content li {
+      margin: 0 10px;
+    }
+
+    @media(max-width: 768px) {
+      .navbar ul,
+      .footer-content ul {
+        flex-direction: column;
+      }
+
+      .navbar li,
+      .footer-content li {
+        margin: 5px 0;
+      }
+
+      .cta-button {
+        font-size: 1rem;
+        padding: 12px 24px;
+      }
+
+      .galeria-item img {
+        height: 220px;
+      }
+
+      .bio-container {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .bio-img img {
+        width: 80%;
+        margin-bottom: 20px;
+      }
+
+      .bio-texto {
+        text-align: left;
+      }
+    }
+
+
+  </style>
+</head>
+<body>
+
+  <!-- Top Bar -->
+  <div class="top-bar">
+    <a href="https://wa.link/hs5iw3" class="telefone-botao" target="_blank">Fale comigo no WhatsApp</a>
+    <span>Email: contato@artesdasassa.com</span>
+    <span><a href="https://www.youtube.com/c/ArtesdaSassa" target="_blank">YouTube</a></span>
+    <span><a href="https://www.instagram.com/artesdasassa" target="_blank">Instagram</a></span>
+  </div>
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="logo">
+      <img src="channels4_profile.jpg" alt="Logo - Artes da Sassa">
+    </div>
+    <ul>
+      <li><a href="inicio.html" class="active">Página Inicial</a></li>
+      <li><a href="sobre.html">Sobre Mim</a></li>
+      <li><a href="peça.html">Peças</a></li>
+      <li><a href="contato.html">Contato</a></li>
+    </ul>
+  
+    
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-container">
+      <img src="canal.jpg" alt="Artesanato por Artes da Sassa" class="hero-img">
+      <a href="https://www.youtube.com/c/ArtesdaSassa" target="_blank" class="cta-button">Conheça meu canal</a>
+    </div>
+  </section>
+
+  <!-- Biografia com imagem -->
+  <section class="biografia">
+    <div class="bio-container">
+      <div class="bio-img">
+        <img src="sabrina.jpg" alt="Sabrina Bressane - Artes da Sassa">
+      </div>
+      <div class="bio-texto">
+        <h2>Sobre a Artesã</h2>
+        <p>
+          Olá! Meu nome é Sabrina Bressane, mais conhecida como Artes da Sassa. Tenho 46 anos e moro no interior de São Paulo. Sou professora e alfabetizadora, profissão que exerço com muito amor. Já são mais de 7 anos dedicados ao artesanato — minha segunda paixão.
+        </p>
+        <p>
+          Trabalho com a confecção de bonecas de pano, guirlandas de maternidade e peças encantadoras feitas à mão. Também dou aulas em uma escolinha para crianças e compartilho meu conhecimento no meu canal do YouTube, onde ensino passo a passo das peças e disponibilizo os moldes gratuitamente.
+        </p>
+        <p>
+          Sou casada com meu marido Paulo Felipe e tenho dois filhos: Ester (15 anos) e André (11 anos). Convido você a conhecer mais do meu trabalho pelas redes sociais. Será um prazer ter você por perto nessa jornada criativa!
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="galeria">
+    <div class="galeria-item">
+      <img src="santa_rita.jpg" alt="Santa Rita">
+      <p>Santa Rita</p>
+    </div>
+    <div class="galeria-item">
+      <img src="porta_papel.jpg" alt="Boneca Porta papel higiênico - Ursinho">
+      <p>Boneca Porta papel higiênico - Ursinho</p>
+    </div>
+    <div class="galeria-item">
+      <img src="xicara.jpg" alt="Boneca na Xícara">
+      <p>Boneca na Xícara</p>
+    </div>
+    <div class="galeria-item">
+      <img src="bruxa.jpg" alt="Bruxa">
+      <p>Bruxa</p>
+    </div>
+  </section>
+  
+
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-content">
+      <div class="logo">
+        <img src="channels4_profile.jpg" alt="Logo - Artes da Sassa">
+      </div>
+      <ul>
+        <li><a href="index.html" class="active">Página Inicial</a></li>
+        <li><a href="sobre.html">Sobre Mim</a></li>
+        <li><a href="pecas.html">Peças</a></li>
+        <li><a href="contato.html">Contato</a></li>
+      </ul>
+      <a href="https://wa.link/hs5iw3" class="telefone-botao" target="_blank">Fale comigo no WhatsApp</a>
+    </div>
+  </footer>
+  <div id="mensagem-boas-vindas">
+    <p>✨ Bem-vindo(a) ao mundo encantado da <strong>Artes da Sassa</strong>! ✨</p>
+  </div>
+  
+  <script>
+    window.addEventListener('DOMContentLoaded', () => {
+      const mensagem = document.getElementById('mensagem-boas-vindas');
+      mensagem.classList.add('mostrar');
+  
+      // Esconde a mensagem depois de 5 segundos
+      setTimeout(() => {
+        mensagem.classList.remove('mostrar');
+        mensagem.classList.add('esconder');
+      }, 5000);
+    });
+  </script>
+  
+</body>
+
+
+</html>
